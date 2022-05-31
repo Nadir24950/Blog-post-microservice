@@ -1,0 +1,22 @@
+{
+    "blogs":[
+        {
+            "title": "Welcome to my blog",
+            "content": "this is the content of my blog ",
+            "author": "Nadir",
+            "id": 1
+        },
+        {
+            "title": "First blog",
+            "content": "This is my first blog",
+            "author": "Nadir",
+            "id": 2
+        },
+        {
+            "title": "Sabrina's blog",
+            "content": "This is my first blog",
+            "author": "Sabrina",
+            "id": 3
+        }
+    ]
+}
