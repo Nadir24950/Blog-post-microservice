@@ -1,2 +1,5 @@
-node_modules
+inventory/__pycache__
+payment/__pycache__
+__pycache__
+frontend/node_modules
 .vscode

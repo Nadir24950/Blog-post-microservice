@@ -1,7 +1,7 @@
-import Nav from "./Nav";
-import Home from "./Home";
+import Nav from "./components/Nav";
+import Home from "./components/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Create from "./Create";
+import Create from "./components/Create";
 
 function App() {
   return (
