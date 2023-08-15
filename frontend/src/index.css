@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
 
+:root {
+  --main-color: rgb(22, 230, 126);
+}
+
 * {
   margin: 0;
   font-family: "Quicksand", sans-serif;
@@ -16,7 +20,7 @@
 }
 
 .navbar h1 {
-  color: #f1356d;
+  color: var(--main-color);
 }
 
 .navbar .links {
@@ -31,7 +35,7 @@
 }
 
 .navbar a:hover {
-  color: #f1356d;
+  color: var(--main-color);
 }
 
 .content {
@@ -52,6 +56,36 @@
 .blog-preview:hover {
   animation-name: blog-preview-hover;
   animation-duration: 0.25s;
-  border-bottom: 8px solid #f1356d;
+  border-bottom: 8px solid var(--main-color);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.create {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.create h2 {
+  font-size: 20px;
+  color: var(--main-color);
+  margin-bottom: 30px;
+}
+
+.create input,
+.create textarea {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.create button {
+  background: var(--main-color);
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
 }
