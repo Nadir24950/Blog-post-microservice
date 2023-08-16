@@ -18,8 +18,8 @@ const Nav = () => {
         <Link
           to="/create"
           style={{
-            color: "white",
-            backgroundColor: "orange",
+            color: "gray",
+            background: "linear-gradient(90deg, #faf0cd, #fab397)",
             borderRadius: "8px",
           }}
         >

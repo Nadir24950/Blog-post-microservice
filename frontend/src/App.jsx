@@ -1,7 +1,5 @@
 import Nav from "./components/Nav";
 import Home from "./components/Home";
-import Create from "./components/Create";
-import { Link } from "react-router-dom";
 
 function App() {
   return (

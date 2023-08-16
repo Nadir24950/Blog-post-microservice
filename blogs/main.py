@@ -21,7 +21,7 @@ redis = get_redis_connection(
 class Blog(HashModel):
     title: str
     body: str
-    author: str
+    #author: str
 
     class Meta:
         database = redis
@@ -38,8 +38,8 @@ def format(pk: str):
     return {
         'id': blog.pk,
         'title': blog.title,
-        'body': blog.body,
-        'author': blog.author
+        'body': blog.body
+        #'author': blog.author
     }
 
 
