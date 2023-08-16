@@ -19,6 +19,7 @@ const router = createBrowserRouter([
   {
     path: "/blogs/:id",
     element: <BlogDetails />,
+    errorElement: <NotFound />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(

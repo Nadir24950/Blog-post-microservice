@@ -8,7 +8,7 @@ const NotFound = () => {
   return (
     <>
       <Nav></Nav>
-      <div className="not-found">
+      <div className="not-found content">
         <h2>Sorry</h2>
         <p>That page cannot be found</p>
         <p>
