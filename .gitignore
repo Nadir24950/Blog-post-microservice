@@ -1,6 +1,7 @@
 inventory/__pycache__
 payment/__pycache__
 __pycache__
+node_modules
 frontend/node_modules
 .vscode
 dump.rdb

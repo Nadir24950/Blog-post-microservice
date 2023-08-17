@@ -6,7 +6,7 @@ const Home = () => {
     data: blogs,
     isPending,
     customError,
-  } = useFetch("http://localhost:8000/blogs");
+  } = useFetch("http://localhost:3030/blogs");
 
   useFetch();
   return (

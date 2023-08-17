@@ -5,13 +5,13 @@ import Nav from "./Nav";
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const dbUri = "http://localhost:8000/blogs";
+  const api = "http://localhost:3030/blogs";
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const blog = { title, body };
-    fetch(dbUri, {
+    fetch(api, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),

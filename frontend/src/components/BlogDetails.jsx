@@ -3,16 +3,16 @@ import { useFetch } from "../api/useFetch";
 import Nav from "./Nav";
 
 const BlogDetails = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const {
     data: blog,
     error,
     isPending,
-  } = useFetch("http://localhost:8000/blogs/" + id);
+  } = useFetch("http://localhost:3030/blogs/" + _id);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    fetch("http://localhost:8000/blogs/" + blog.id, {
+    fetch("http://localhost:3030/blogs/" + blog._id, {
       method: "DELETE",
     }).then(() => {
       navigate("/");
