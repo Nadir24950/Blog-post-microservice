@@ -25,7 +25,12 @@ pipeline{
     
         stage("Checkout from SCM"){
             steps {
-                git branch: 'blog-post-microservice', credentialsId: 'github', url: 'https://github.com/Nadir24950/todolist'
+                script{
+                    git branch: 'blog-post-microservice', credentialsId: 'github', url: 'https://github.com/Nadir24950/todolist'
+                    sh "pwd"
+                    sh "ls -al"
+                }
+                
             }
 
         }
