@@ -27,9 +27,6 @@ pipeline{
             steps {
                 script{
                     git branch: 'blog-post-microservice', credentialsId: 'github', url: 'https://github.com/Nadir24950/todolist'
-                    sh "pwd"
-                    sh "ls -al"
-                }
                 
             }
 
@@ -38,7 +35,7 @@ pipeline{
         stage("Install NPM dependencies"){
             steps {
                 script{
-                    sh "cd ./frontend"
+                    sh "cd frontend"
                     sh "npm install"
                 }
             }
