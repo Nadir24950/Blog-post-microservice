@@ -2,7 +2,9 @@ pipeline{
     agent{
         label "jenkins-agent"
     }
-
+    tools{
+        "NodeJS20"
+    }
     // environment {
     //     APP_NAME = "complete-production-e2e-pipeline"
     //     RELEASE = "1.0.0"
@@ -27,17 +29,12 @@ pipeline{
             }
 
         }
-        stage("Build Application"){
-            steps {
-                sh "mvn clean package"
-            }
-        }
 
-        stage("Test Application"){
+        stage("Install NPM dependencies"){
             steps {
                 script{
                     sh "cd ./frontend"
-                    sh "npm install "
+                    sh "npm install"
                 }
             }
 
