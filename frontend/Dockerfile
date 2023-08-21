@@ -6,7 +6,9 @@ WORKDIR /usr/src/app
 
 COPY ["package.json", "package-lock.json", "./"]
 
-RUN npm install 
+RUN npm install
+
+FROM developement as dev 
 
 COPY . /usr/src/app/
 

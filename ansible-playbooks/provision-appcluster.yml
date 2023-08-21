@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install K3s
+      command: "curl -sfL INSTALL_K3S_EXEC="server" sh -s - --disable traefik"
+    
+    - name: Create .kube directory
+      file:
+        path: "{{ ansible_env.HOME }}/.kube"
+        state: directory
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
+        mode: "0755"
+    
+    - name: Copy Configuration file to the new directory
+      copy:
+        src: etc/rancher/k3s/k3s.yaml
+        dest: "{{ ansible_env.HOME }}/.kube/config"
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
+      
+    - name: Change permissions of k3s configuration
+      file:
+        path: "{{ ansible_env.HOME }}/.kube/config"
+        owner: "{{ ansible_env.USER }}"
+        group: "{{ ansible_env.USER }}"
+        mode: "0400"
+
+    - name: Set KUBECONFIG environement variable
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        line: "export KUBECONFIG={{ ansible_env.HOME }}/.kube/config"
+        create: yes
+    
+    - name: Reload the shell
+      ansible.builtin.command: source "{{ ansible_env.HOME }}/.bashrc"
+
