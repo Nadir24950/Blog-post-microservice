@@ -34,7 +34,7 @@ pipeline{
         stage("Install NPM dependencies"){
             steps {
                 script{
-                    sh "npm install ./frontend/package.json --production"
+                    sh "npm install ./frontend --production"
                 }
             }
 
