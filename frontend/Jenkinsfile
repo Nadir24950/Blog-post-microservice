@@ -2,8 +2,8 @@ pipeline{
     agent{
         label "jenkins-agent"
     }
-    tools{
-        "NodeJS20"
+    tools {
+        nodejs "NodeJS20"
     }
     // environment {
     //     APP_NAME = "complete-production-e2e-pipeline"
