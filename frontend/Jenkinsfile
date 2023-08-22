@@ -39,6 +39,13 @@ pipeline{
             }
 
         }
+
+        stage("Build the App")
+            steps{
+                script{
+                    sh "cd ./freontend && npm run build"
+                }
+            }
         // stage("SonarQube Analysis"){
         //     steps{
         //         withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
