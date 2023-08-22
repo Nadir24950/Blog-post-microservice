@@ -43,7 +43,7 @@ pipeline{
         stage("Build the App"){
             steps{
                 script{
-                    sh "cd ./freontend && npm run build"
+                    sh "npm run build"
                 }
             }
         }
