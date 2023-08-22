@@ -5,6 +5,9 @@ pipeline{
     tools {
         nodejs "NodeJS20"
     }
+    dir {
+        path "./frontend"
+    }
     // environment {
     //     APP_NAME = "complete-production-e2e-pipeline"
     //     RELEASE = "1.0.0"
@@ -43,7 +46,9 @@ pipeline{
         stage("Build the App"){
             steps{
                 script{
-                    sh "npm run build"
+                    dir("./frontend") {
+                        sh "npm run build"
+                    }
                 }
             }
         }
