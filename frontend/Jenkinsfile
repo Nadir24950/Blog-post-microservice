@@ -37,7 +37,6 @@ pipeline{
                     sh "npm install ./frontend"
                 }
             }
-
         }
 
         stage("Build the App"){
@@ -49,9 +48,8 @@ pipeline{
         }
 
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarScanner';
             withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
-                sh "${scannerHome}/bin/sonar-scanner"
+                sh "${sonarqube-scanner}/bin/sonar-scanner"
             }
         }
         // stage("SonarQube Analysis"){
