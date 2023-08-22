@@ -48,8 +48,10 @@ pipeline{
         }
 
         stage('SonarQube Analysis') {
-            withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
-                sh "${sonarqube-scanner}/bin/sonar-scanner"
+            steps{
+                withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
+                    sh "${sonarqube-scanner}/bin/sonar-scanner"
+                }
             }
         }
         // stage("SonarQube Analysis"){
