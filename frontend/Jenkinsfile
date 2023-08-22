@@ -45,9 +45,10 @@ pipeline{
 
         stage("Build the App"){
             steps{
-                    dir("./frontend") {
-                        sh "npm run build"
-                    }
+                dir("./frontend") {
+                    sh "cd ./frontend"
+                    sh "npm run build"
+                }
             }
         }
             
