@@ -3,16 +3,16 @@ import { useFetch } from "../api/useFetch";
 import Nav from "./Nav";
 
 const BlogDetails = () => {
-  const { _id } = useParams();
+  const { id } = useParams();
   const {
     data: blog,
     error,
     isPending,
-  } = useFetch("http://localhost:3030/blogs/" + _id);
+  } = useFetch("http://localhost:3030/blogs/" + id);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    fetch("http://localhost:3030/blogs/" + blog._id, {
+    fetch("http://localhost:3030/blogs/" + id, {
       method: "DELETE",
     }).then(() => {
       navigate("/");
@@ -28,7 +28,7 @@ const BlogDetails = () => {
         {blog && (
           <article>
             <h2>{blog.title}</h2>
-            <p>Written by {blog.author}</p>
+            {/* <p>Written by {blog.author}</p> */}
             <div>{blog.body}</div>
             <button onClick={handleClick}>Delete</button>
           </article>

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 const app = express();
 const PORT = 3030;
@@ -44,8 +45,12 @@ app.post("/blogs", async (req, res) => {
 
 app.get("/blogs/:id", async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id);
-    res.json(blog);
+    if (ObjectId.isValid(req.params.id)) {
+      const blog = await Blog.findById(req.params.id);
+      res.json(blog);
+    } else {
+      console.log("Id is not valid");
+    }
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
   }
