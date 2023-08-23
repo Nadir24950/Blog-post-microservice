@@ -3,7 +3,7 @@ pipeline{
         label "jenkins-agent"
     }
     tools {
-        nodejs "NodeJS20"
+        nodejs "NodeJS18"
     }
     // environment {
     //     APP_NAME = "complete-production-e2e-pipeline"
@@ -57,16 +57,16 @@ pipeline{
                 }
             }
         }
+        stage("Quality Gate"){
+            steps {
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'   
+                }  
+            }
+        }
     }
 }
 
-        // stage("SonarQube Analysis"){
-        //     steps{
-        //         withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
-        //             sh "mvn sonar:sonar "
-        //         }
-        //     }
-        // }
         // stage("Quality Gate"){
         //     steps {
         //         script{
