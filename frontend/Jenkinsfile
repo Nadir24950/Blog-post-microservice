@@ -52,7 +52,7 @@ pipeline{
                 script{
                     def scannerHome = tool "sonarqube-scanner"
                     withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
-                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=nodejs"
                     }
                 }
             }
