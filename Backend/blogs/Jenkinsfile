@@ -1,0 +1,91 @@
+pipeline{
+    agent{
+        label "jenkins-agent"
+    }
+    tools {
+        nodejs "NodeJS18"
+    }
+    environment {
+        APP_NAME = "blog-post-microservice-blogs"
+        RELEASE = "1.0.0"
+        DOCKER_USER = "nadir24950"
+        DOCKER_PASS = 'dockerhub'
+        IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+        IMAGE_TAG = "${RELEASE}" + "-" + "${BUILD_NUMBER}"
+        JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
+    } 
+    
+    stages{
+        stage("Cleanup Workspace"){
+            steps {
+                cleanWs()
+            }
+
+        }
+    
+        stage("Checkout from SCM"){
+            steps {
+                script{
+                    git branch: 'blog-post-microservice', credentialsId: 'github', url: 'https://github.com/Nadir24950/todolist'
+                
+                }
+            }
+        }
+        stage("Install NPM dependencies"){
+            steps {
+                script{
+                    dir("./Backend/blogs") {
+                        sh "npm ci --only=production"
+                    }
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps{
+                script{
+                    def scannerHome = tool "sonarqube-scanner"
+                    withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=nodejs"
+                    }
+                }
+            }
+        }
+        stage("Quality Gate"){
+            steps {
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'   
+                }  
+            }
+        }
+        stage("Build and push Docker Image"){
+            steps{
+                script {
+                    dir("./Backend/blogs"){
+                        docker.withRegistry('', DOCKER_PASS) {
+                            docker_image = docker.build "${IMAGE_NAME}"
+                        }
+                        docker.withRegistry('', DOCKER_PASS) {
+                            docker_image.push("${IMAGE_TAG}")
+                            docker_image.push("latest")
+                        }
+                    }
+                }
+            }
+        }
+        stage("Trigger The Blogs-Microservice Pipeline"){
+            steps{
+                build job: "blog-pipeline-blogs-service", wait: false
+            }
+        }
+    }
+}
+
+
+        // stage("Trigger CD Pipeline"){
+        //     steps{
+        //         script{
+        //             sh "curl -v -k --user Nadir24950:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'https://jenkins.cloud-devops-project.dev/job/gitops-jenkins-java/buildWithParameters?token=gitops-token'"
+        //         }
+        //     }
+        // }
