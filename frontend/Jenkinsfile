@@ -81,6 +81,11 @@ pipeline{
                 }
             }
         }
+        stage("Trigger The Blogs-Microservice Pipeline"){
+            steps{
+                build job: "blog-pipeline-blogs-service", wait: false
+            }
+        }
     }
 }
 
