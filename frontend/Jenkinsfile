@@ -51,6 +51,7 @@ pipeline{
             steps{
                 script{
                     def scannerHome = tool "sonarqube-scanner"
+                    sh "echo 'sonar.projectKey=nodejs >> sonar-project.properties'"
                     withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
