@@ -1,18 +1,27 @@
-FROM node:16-alpine AS developement
-
-#ENV NODE_ENV=production
+FROM node:18-alpine AS build
 
 WORKDIR /usr/src/app
 
+ENV PATH /app/node_modules/.bin:$PATH
+
 COPY ["package.json", "package-lock.json", "./"]
+
+RUN npm ci --silent
 
 RUN npm install
 
-FROM developement as dev 
+COPY . ./
 
-COPY . /usr/src/app/
+RUN npm run build
 
-EXPOSE 5173
+# production environment
 
-CMD ["npm", "run", "dev"]
+FROM nginx:stable-alpine
 
+COPY --from=build usr/src/app/dist /usr/share/nginx/html
+
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
