@@ -49,11 +49,17 @@ pipeline{
 
         stage('SonarQube Analysis') {
             steps{
-                withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
-                    sh "${sonarqube-scanner}/bin/sonar-scanner"
+                script{
+                    def scannerHome = tool "sonarqube-scanner"
+                    withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
+    }
+}
+
         // stage("SonarQube Analysis"){
         //     steps{
         //         withSonarQubeEnv(installationName:"sonarqube-scanner",credentialsId:"jenkins-sonarqube-token"){
@@ -89,5 +95,3 @@ pipeline{
         //         }
         //     }
         // }
-    }
-}
