@@ -6,7 +6,7 @@ pipeline{
         nodejs "NodeJS18"
     }
     environment {
-        APP_NAME = "blog-post-microservice"
+        APP_NAME = "blog-post-microservice-frontend"
         RELEASE = "1.0.0"
         DOCKER_USER = "nadir24950"
         DOCKER_PASS = 'dockerhub'
