@@ -1,12 +1,14 @@
+const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 
+dotenv.config();
+
 const app = express();
-const PORT = 3030;
-const uri =
-  "mongodb+srv://nadir24950:1ITd5ynQ@cluster0.hcif53s.mongodb.net/?retryWrites=true&w=majority";
+const PORT = process.env.PORT;
+const uri = process.env.MONGODB_URI;
 
 app.use(cors());
 app.use(express.json());

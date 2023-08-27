@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+const token = false;
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -34,6 +35,24 @@ app.post("/api/create_user", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
   }
+});
+app.get("/api/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      if (
+        password ==
+        User.findOne({
+          username: req.params.username,
+          password: req.params.password,
+        })
+      ) {
+        token = true;
+        return res.send("200");
+      }
+    }
+  } catch (error) {}
 });
 
 app.listen(PORT, () => {
