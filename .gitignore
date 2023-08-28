@@ -8,6 +8,5 @@ dump.rdb
 frontend/dist
 web
 prometheus-2.45.0.linux-amd64
-terraform-app-cluster
 Backend/blogs/.env
 

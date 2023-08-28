@@ -11,22 +11,6 @@
         state: directory
         owner: "nadir24950"
         group: "nadir24950"
-        mode: "0755"
-
-    - name: Copy Configuration file to the new directory
-      copy:
-        src: "/etc/rancher/k3s/k3s.yaml"
-        dest: "/home/nadir24950/.kube/config"
-        owner: "nadir24950"
-        group: "nadir24950"
-        remote_src: true
-
-    - name: Change permissions of k3s configuration
-      file:
-        path: "/home/nadir24950/.kube/config"
-        owner: "nadir24950"
-        group: "nadir24950"
-        mode: "0400"
 
     - name: Set KUBECONFIG environment variable
       shell: echo "The value is set"
