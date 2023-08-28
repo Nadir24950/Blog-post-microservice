@@ -5,7 +5,8 @@ import Nav from "./Nav";
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const api = "http://localhost:3030/blogs";
+  const api =
+    "http://blog-post-microservice-blogs.default.svc.cluster.local/blogs";
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
