@@ -89,10 +89,10 @@ pipeline{
 }
 
 
-        // stage("Trigger CD Pipeline"){
-        //     steps{
-        //         script{
-        //             sh "curl -v -k --user Nadir24950:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'https://jenkins.cloud-devops-project.dev/job/gitops-jenkins-java/buildWithParameters?token=gitops-token'"
-        //         }
-        //     }
-        // }
+        stage("Trigger CD Pipeline"){
+            steps{
+                script{
+                    sh "curl -v -k --user Nadir24950:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'https://jenkins.cloud-devops-project.dev/job/gitops-jenkins-java/buildWithParameters?token=gitops-token'"
+                }
+            }
+        }
