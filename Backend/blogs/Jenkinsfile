@@ -11,7 +11,7 @@ pipeline{
         DOCKER_USER = "nadir24950"
         DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
-        IMAGE_TAG = "${RELEASE}" + "-" + "${BUILD_NUMBER}"
+        BLOG_IMAGE_TAG = "${RELEASE}" + "-" + "${BUILD_NUMBER}"
         JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
     } 
     
@@ -66,10 +66,17 @@ pipeline{
                             docker_image = docker.build "${IMAGE_NAME}"
                         }
                         docker.withRegistry('', DOCKER_PASS) {
-                            docker_image.push("${IMAGE_TAG}")
+                            docker_image.push("${BLOG_IMAGE_TAG}")
                             docker_image.push("latest")
                         }
                     }
+                }
+            }
+        }
+        stage("Trigger CD Pipeline"){
+            steps {
+                script{
+                    sh "curl -v -k --user Nadir24950:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'BLOG_IMAGE_TAG=${BLOG_IMAGE_TAG}' 'https://jenkins.cloud-devops-project.dev/job/blog-pipeline-gitops/buildWithParameters?token=gitops-token'"
                 }
             }
         }
