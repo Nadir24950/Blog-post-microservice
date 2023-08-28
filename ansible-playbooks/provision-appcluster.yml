@@ -3,36 +3,32 @@
   become: true
   tasks:
     - name: Install K3s
-      command: "curl -sfL INSTALL_K3S_EXEC="server" sh -s - --disable traefik"
-    
+      shell: "curl -sfL https://get.k3s.io | K3S_URL=https://10.200.0.8:6443 sh -s - agent --token K1029ff3d0517051a44c02261975aa088f515efc2c3f4db373388f64347696bb536::server:91ca79c6fb8a3c641a7c249d2f8afa2e"
+
     - name: Create .kube directory
       file:
-        path: "{{ ansible_env.HOME }}/.kube"
+        path: "/home/nadir24950/.kube"
         state: directory
-        owner: "{{ ansible_env.USER }}"
-        group: "{{ ansible_env.USER }}"
+        owner: "nadir24950"
+        group: "nadir24950"
         mode: "0755"
-    
+
     - name: Copy Configuration file to the new directory
       copy:
-        src: etc/rancher/k3s/k3s.yaml
-        dest: "{{ ansible_env.HOME }}/.kube/config"
-        owner: "{{ ansible_env.USER }}"
-        group: "{{ ansible_env.USER }}"
-      
+        src: "/etc/rancher/k3s/k3s.yaml"
+        dest: "/home/nadir24950/.kube/config"
+        owner: "nadir24950"
+        group: "nadir24950"
+        remote_src: true
+
     - name: Change permissions of k3s configuration
       file:
-        path: "{{ ansible_env.HOME }}/.kube/config"
-        owner: "{{ ansible_env.USER }}"
-        group: "{{ ansible_env.USER }}"
+        path: "/home/nadir24950/.kube/config"
+        owner: "nadir24950"
+        group: "nadir24950"
         mode: "0400"
 
-    - name: Set KUBECONFIG environement variable
-      lineinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        line: "export KUBECONFIG={{ ansible_env.HOME }}/.kube/config"
-        create: yes
-    
-    - name: Reload the shell
-      ansible.builtin.command: source "{{ ansible_env.HOME }}/.bashrc"
-
+    - name: Set KUBECONFIG environment variable
+      shell: echo "The value is set"
+      environment:
+        KUBECONFIG: /home/nadir24950/.kube/config

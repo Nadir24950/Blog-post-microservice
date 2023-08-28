@@ -27,7 +27,6 @@ pipeline{
             steps {
                 script{
                     git branch: 'blog-post-microservice', credentialsId: 'github', url: 'https://github.com/Nadir24950/todolist'
-                
                 }
             }
         }

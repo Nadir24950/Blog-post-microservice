@@ -4,6 +4,8 @@
 cd "$(dirname "$0")/terraform-app-cluster"
 
 
+
+
 #Define Instance Number
 
 instance_number=3
