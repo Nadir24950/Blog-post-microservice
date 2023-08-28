@@ -8,19 +8,13 @@ const BlogDetails = () => {
     data: blog,
     error,
     isPending,
-  } = useFetch(
-    "http://blog-post-microservice-blogs.default.svc.cluster.local/blogs/" + id
-  );
+  } = useFetch("http://blog-post-microservice-blogs.default/blogs/" + id);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    fetch(
-      "http://blog-post-microservice-blogs.default.svc.cluster.local/blogs/" +
-        id,
-      {
-        method: "DELETE",
-      }
-    ).then(() => {
+    fetch("http://blog-post-microservice-blogs.default/blogs/" + id, {
+      method: "DELETE",
+    }).then(() => {
       navigate("/");
     });
   };

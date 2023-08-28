@@ -6,9 +6,7 @@ const Home = () => {
     data: blogs,
     isPending,
     customError,
-  } = useFetch(
-    "http://blog-post-microservice-blogs.default.svc.cluster.local/blogs"
-  );
+  } = useFetch("http://blog-post-microservice-blogs.default/blogs");
 
   useFetch();
   return (
